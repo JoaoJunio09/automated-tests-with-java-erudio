@@ -1,21 +1,45 @@
 package br.com.erudio.automated_tests_with_java_erudio;
 
 import br.com.erudio.automated_tests_with_java_erudio.math.SimpleMath;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Test Math Operations in SimpleMath Class")
 class SimpleMathTest {
 
+    SimpleMath math;
+
+    @BeforeAll
+    static void setup() {
+        System.out.println("Running @BeforeAll method!");
+    }
+
+    @AfterAll
+    static void cleanup() {
+        System.out.println("Running @AfterAll method!");
+    }
+
+    @BeforeEach
+    void beforeEachMethod() {
+        System.out.println("Running @BeforeEach method!");
+        math = new SimpleMath();
+    }
+
+    @AfterEach
+    void afterEachMethod() {
+        System.out.println("Running @AfterEach method!");
+    }
+
     // Nomenclatura:
     // test[System Under Test]_[Condition or State Change]_[Expected]
     @Test
     @DisplayName("Test 6.2 + 2 = 8.2")
     void testSum_When_SixDotTwoIsAddedByTwo_ShouldReturnEightDotTwo() {
+
+        System.out.println("Running Test 6.2 + 2 = 8.2");
+
         // Given / Arrange
-        SimpleMath math = new SimpleMath();
         double firstNumber = 6.2D;
         double secondNumber = 2D;
         Double expected = 8.2D;
@@ -32,7 +56,9 @@ class SimpleMathTest {
     @Test
     @DisplayName("Test 10.5 - 5 = 5.5")
     void testSubtraction() {
-        SimpleMath math = new SimpleMath();
+
+        System.out.println("Running Test 10.5 - 5 = 5.5");
+
         double firstNumber = 10.5D;
         double secondNumber = 5D;
 
@@ -47,7 +73,9 @@ class SimpleMathTest {
     @Test
     @DisplayName("Test 10 * 5 = 50")
     void testMultiplication() {
-        SimpleMath math = new SimpleMath();
+
+        System.out.println("Running Test 10 * 5 = 50");
+
         double firstNumber = 10.0D;
         double secondNumber = 5D;
 
@@ -60,9 +88,11 @@ class SimpleMathTest {
     }
 
     @Test
-    @DisplayName("Test Division by Zero")
+    @DisplayName("Test 5 / 5 = 1")
     void testDivision() {
-        SimpleMath math = new SimpleMath();
+
+        System.out.println("Running Test Division by Zero");
+
         double firstNumber = 5D;
         double secondNumber = 5D;
 
@@ -74,15 +104,20 @@ class SimpleMathTest {
         assertNotEquals(12D, actual);
     }
 
+    @Disabled("TODO: We need still work on it!")
     @Test
+    @DisplayName("Test Division by Zero")
     void testDivision_When_FirstNumberIsDividedByZero_ShouldThrowArithmeticException() {
+        System.out.println("Running Test Division by Zero");
         fail();
     }
 
     @Test
     @DisplayName("Test (5 + 5) / 2 = 5")
     void testMean() {
-        SimpleMath math = new SimpleMath();
+
+        System.out.println("Running Test (5 + 5) / 2 = 5");
+
         double firstNumber = 5D;
         double secondNumber = 5D;
 
@@ -92,5 +127,13 @@ class SimpleMathTest {
         assertEquals(expected, actual, () -> "("+firstNumber+")" + "+" + "("+secondNumber+")/2" + " did not produce " + expected + "!");
         assertNotNull(actual);
         assertNotEquals(12D, actual);
+    }
+
+    @DisplayName("Display Name")
+    @Test
+    void testABCD_When_XYZ_Should() {
+        // Given / Arrange
+        // When / Act
+        // Then / Assert
     }
 }
