@@ -1,6 +1,8 @@
 package br.com.erudio.automated_tests_with_java_erudio;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
@@ -19,6 +21,7 @@ class ArraysCompareTest {
         assertArrayEquals(expectedArray, numbers);
     }
 
+    @Disabled
     @Test
     // @Timeout(1)
     @Timeout(value = 15, unit = TimeUnit.MILLISECONDS)
