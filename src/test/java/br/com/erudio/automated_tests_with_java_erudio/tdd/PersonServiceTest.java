@@ -7,15 +7,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PersonServiceTest {
 
+    IPersonService service;
     Person person;
 
     @BeforeEach
     void setup() {
+        service = new PersonService();
         person = new Person(
         "Keith",
         "Moon",
@@ -29,7 +30,6 @@ class PersonServiceTest {
     @Test
     void testCreatePerson_WhenSuccess_ShouldReturnPersonObject() {
         // Given / Arrange
-        IPersonService service = new PersonService();
 
         // When / Act
         Person actual = service.createPerson(person);
@@ -38,11 +38,10 @@ class PersonServiceTest {
         assertNotNull(actual, () -> "The createPerson() should not have returned null!");
     }
 
-    @DisplayName("When Create a Person with Success Should Contains ID in Returned a Person Object")
+    @DisplayName("When Create a Person with Success Should Contains Invalid Fields in Returned a Person Object")
     @Test
-    void testCreatePerson_WhenSuccess_ShouldContainsIDInReturnedPersonObject() {
+    void testCreatePerson_WhenSuccess_ShouldContainsInvalidFieldsInReturnedPersonObject() {
         // Given / Arrange
-        IPersonService service = new PersonService();
 
         // When / Act
         Person actual = service.createPerson(person);
@@ -51,85 +50,47 @@ class PersonServiceTest {
         assertNotNull(
             actual.getId(),
             () -> "Person ID is Missing!");
-    }
-
-    @DisplayName("When Create a Person with Success Should Contains FirstName in Returned a Person Object")
-    @Test
-    void testCreatePerson_WhenSuccess_ShouldContainsFirstNameInReturnedPersonObject() {
-        // Given / Arrange
-        IPersonService service = new PersonService();
-
-        // When / Act
-        Person actual = service.createPerson(person);
-
-        // Then / Assert
         assertEquals(
             person.getFirstName(),
             actual.getFirstName(),
             () -> "The FirstName is Different!");
-    }
-
-    @DisplayName("When Create a Person with Success Should Contains LastName in Returned a Person Object")
-    @Test
-    void testCreatePerson_WhenSuccess_ShouldContainsLastNameInReturnedPersonObject() {
-        // Given / Arrange
-        IPersonService service = new PersonService();
-
-        // When / Act
-        Person actual = service.createPerson(person);
-
-        // Then / Assert
         assertEquals(
             person.getLastName(),
             actual.getLastName(),
             () -> "The LastName is Different!");
-    }
-
-    @DisplayName("When Create a Person with Success Should Contains Address in Returned a Person Object")
-    @Test
-    void testCreatePerson_WhenSuccess_ShouldContainsAddressInReturnedPersonObject() {
-        // Given / Arrange
-        IPersonService service = new PersonService();
-
-        // When / Act
-        Person actual = service.createPerson(person);
-
-        // Then / Assert
         assertEquals(
             person.getAddress(),
             actual.getAddress(),
             () -> "The Address is Different!");
-    }
-
-    @DisplayName("When Create a Person with Success Should Contains Gender in Returned a Person Object")
-    @Test
-    void testCreatePerson_WhenSuccess_ShouldContainsGenderInReturnedPersonObject() {
-        // Given / Arrange
-        IPersonService service = new PersonService();
-
-        // When / Act
-        Person actual = service.createPerson(person);
-
-        // Then / Assert
         assertEquals(
             person.getGender(),
             actual.getGender(),
             () -> "The Gender is Different!");
-    }
-
-    @DisplayName("When Create a Person with Success Should Contains E-mail in Returned a Person Object")
-    @Test
-    void testCreatePerson_WhenSuccess_ShouldContainsEmailInReturnedPersonObject() {
-        // Given / Arrange
-        IPersonService service = new PersonService();
-
-        // When / Act
-        Person actual = service.createPerson(person);
-
-        // Then / Assert
         assertEquals(
             person.getEmail(),
             actual.getEmail(),
             () -> "The E-mail is Different!");
+    }
+
+    @DisplayName("When Create a Person with null e-Mail Should throw Exception")
+    @Test
+    void testCreatePerson_WithNullEmail_ShouldThrowIllegalArgumentException() {
+        // Given / Arrange
+        person.setEmail(null);
+
+        var expectedMessage = "The Person e-Mail is null or empty!";
+
+        // When / Act
+        // Then / Assert
+        IllegalArgumentException exception = assertThrows(
+            IllegalArgumentException.class,
+            () -> service.createPerson(person),
+            () -> "Empty e-Mail should have cause an IllegalArgumentException!");
+
+        // Then / Assert
+        assertEquals(
+            expectedMessage,
+            exception.getMessage(),
+            () -> "Exception error message is incorrect!");
     }
 }
