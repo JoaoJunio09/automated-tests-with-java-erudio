@@ -1,4 +1,4 @@
-package br.com.erudio.automated_tests_with_java_erudio;
+package br.com.erudio.automated_tests_with_java_erudio.intruduction;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;

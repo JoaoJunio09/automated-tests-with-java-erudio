@@ -1,20 +1,24 @@
-package br.com.erudio.automated_tests_with_java_erudio;
+package br.com.erudio.automated_tests_with_java_erudio.intruduction;
 
 import br.com.erudio.automated_tests_with_java_erudio.math.SimpleMath;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Test Math Operations in SimpleMath Class")
-class SimpleMathTestS4 {
+class SimpleMathTestS3 {
 
     SimpleMath math;
+
+    @BeforeAll
+    static void setup() {
+        System.out.println("Running @BeforeAll method!");
+    }
+
+    @AfterAll
+    static void cleanup() {
+        System.out.println("Running @AfterAll method!");
+    }
 
     @BeforeEach
     void beforeEachMethod() {
@@ -83,46 +87,66 @@ class SimpleMathTestS4 {
         assertNotEquals(12D, actual);
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = { "Pelé", "Senna", "Keith Moon" })
-    void testValueSource(String firstName) {
-        assertNotNull(firstName);
-    }
+    @Test
+    @DisplayName("Test 5 / 5 = 1")
+    void testDivision() {
 
-    @DisplayName("Test double subtraction [firstNumber, secondNumber, expected]")
-    @ParameterizedTest
-    // @MethodSource("testDivisionInputParameters")
-    // @MethodSource
-    /*
-    @CsvSource({
-        "6.2, 2, 3.1",
-        "71, 14, 5.07",
-        "18.3, 3.1, 5.90"
-    })
+        System.out.println("Running Test Division by Zero");
 
-    @CsvSource({
-        "Pelé, Football",
-        "Senna, F1",
-        "Keith Moon, ''"
-    })
-    */
-    @CsvFileSource(resources = "/testDivision.csv")
-    void testDivision(double firstNumber, double secondNumber, double expected) {
+        double firstNumber = 5D;
+        double secondNumber = 5D;
 
         Double actual = math.division(firstNumber, secondNumber);
+        Double expected = 1D;
 
-        assertEquals(expected, actual, 2D, () -> firstNumber + "/" + secondNumber + " did not produce " + expected + "!");
+        assertEquals(expected, actual, () -> firstNumber + "/" + secondNumber + " did not produce " + expected + "!");
         assertNotNull(actual);
         assertNotEquals(12D, actual);
     }
 
-    /*
-    public static Stream<Arguments> testDivision() {
-        return Stream.of(
-            Arguments.of(6.2D, 2D, 3.1D),
-            Arguments.of(71D, 14D, 5.07D),
-            Arguments.of(18.3D, 3.1D, 5.90D)
-        );
+    // @Disabled("TODO: We need still work on it!")
+    @Test
+    @DisplayName("Test Division by Zero")
+    void testDivision_When_FirstNumberIsDividedByZero_ShouldThrowArithmeticException() {
+
+        // Given
+        double firstNumber = 6.2D;
+        double secondNumber = 0D;
+
+        var expectedMessage = "Impossible to divide by zero!";
+
+        // When & Then
+        ArithmeticException actual = assertThrows(ArithmeticException.class, () -> {
+            // When & Then
+            math.division(firstNumber, secondNumber);
+        }, () -> "Division by show throw an ArithmeticException");
+
+        assertEquals(expectedMessage, actual.getMessage(), () -> "Unexpected exception message");
     }
-    */
+
+    @Test
+    @DisplayName("Test (5 + 5) / 2 = 5")
+    void testMean() {
+
+        System.out.println("Running Test (5 + 5) / 2 = 5");
+
+        double firstNumber = 5D;
+        double secondNumber = 5D;
+
+        Double actual = math.mean(firstNumber, secondNumber);
+        Double expected = 5D;
+
+        assertEquals(expected, actual, () -> "("+firstNumber+")" + "+" + "("+secondNumber+")/2" + " did not produce " + expected + "!");
+        assertNotNull(actual);
+        assertNotEquals(12D, actual);
+    }
+
+    // @Disabled
+    @DisplayName("Display Name")
+    @Test
+    void testABCD_When_XYZ_Should() {
+        // Given / Arrange
+        // When / Act
+        // Then / Assert
+    }
 }
