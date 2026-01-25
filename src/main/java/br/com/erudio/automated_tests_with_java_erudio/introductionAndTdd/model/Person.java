@@ -1,4 +1,4 @@
-package br.com.erudio.automated_tests_with_java_erudio.domain.model;
+package br.com.erudio.automated_tests_with_java_erudio.introductionAndTdd.model;
 
 import java.io.Serializable;
 import java.util.Objects;

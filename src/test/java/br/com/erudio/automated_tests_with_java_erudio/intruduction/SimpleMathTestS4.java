@@ -1,6 +1,6 @@
 package br.com.erudio.automated_tests_with_java_erudio.intruduction;
 
-import br.com.erudio.automated_tests_with_java_erudio.math.SimpleMath;
+import br.com.erudio.automated_tests_with_java_erudio.introductionAndTdd.math.SimpleMath;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

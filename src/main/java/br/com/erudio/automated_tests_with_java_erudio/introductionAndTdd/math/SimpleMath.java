@@ -1,4 +1,4 @@
-package br.com.erudio.automated_tests_with_java_erudio.math;
+package br.com.erudio.automated_tests_with_java_erudio.introductionAndTdd.math;
 
 public class SimpleMath {
 

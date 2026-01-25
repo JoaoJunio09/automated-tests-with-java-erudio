@@ -1,8 +1,8 @@
 package br.com.erudio.automated_tests_with_java_erudio.tdd;
 
-import br.com.erudio.automated_tests_with_java_erudio.domain.model.Person;
-import br.com.erudio.automated_tests_with_java_erudio.services.PersonService;
-import br.com.erudio.automated_tests_with_java_erudio.services.contract.IPersonService;
+import br.com.erudio.automated_tests_with_java_erudio.introductionAndTdd.model.Person;
+import br.com.erudio.automated_tests_with_java_erudio.introductionAndTdd.services.PersonService;
+import br.com.erudio.automated_tests_with_java_erudio.introductionAndTdd.services.contract.IPersonService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
