@@ -63,14 +63,15 @@ Testes automatizados fazem parte do dia a dia de projetos profissionais e times 
 
 ## 🛠 Estrutura do Repositório
 
+```text
 📦 automated-tests-with-java-erudio/
 ├── 📂 src/
-│ ├── 📂 main/
-│ │ └── 📂 java/
-│ │ └── ☕ Código da aplicação
-│ └── 📂 test/
-│ └── 📂 java/
-│ └── 🧪 Testes automatizados (JUnit, Mockito, etc.)
+│   ├── 📂 main/
+│   │   └── 📂 java/
+│   │       └── ☕ Código da aplicação
+│   └── 📂 test/
+│       └── 📂 java/
+│           └── 🧪 Testes automatizados (JUnit, Mockito, etc.)
 ├── 📜 pom.xml
 └── 📄 README.md
 
