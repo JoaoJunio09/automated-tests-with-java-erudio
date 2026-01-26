@@ -63,7 +63,6 @@ Testes automatizados fazem parte do dia a dia de projetos profissionais e times 
 
 ## 🛠 Estrutura do Repositório
 
-```text
 📦 automated-tests-with-java-erudio/
 ├── 📂 src/
 │   ├── 📂 main/
