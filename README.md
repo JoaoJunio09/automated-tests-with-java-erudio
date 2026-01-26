@@ -86,6 +86,7 @@ Testes automatizados fazem parte do dia a dia de projetos profissionais e times 
 
 ```bash
 mvn test
+```
 
 📌 Evolução contínua
 
