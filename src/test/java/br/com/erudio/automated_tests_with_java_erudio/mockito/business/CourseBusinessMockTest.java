@@ -2,6 +2,7 @@ package br.com.erudio.automated_tests_with_java_erudio.mockito.business;
 
 import br.com.erudio.automated_tests_with_java_erudio.mockito.services.CourseService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class CourseBusinessTest {
+class CourseBusinessMockTest {
 
     CourseService mockService;
     CourseBusiness business;
@@ -50,4 +51,6 @@ class CourseBusinessTest {
         // Then / Assert
         assertEquals(4, filteredCourses.size());
     }
+
+
 }
