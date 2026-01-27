@@ -1,5 +1,6 @@
 package br.com.erudio.automated_tests_with_java_erudio.mockito.service.stubs;
 
+import br.com.erudio.automated_tests_with_java_erudio.mockito.Student;
 import br.com.erudio.automated_tests_with_java_erudio.mockito.services.CourseService;
 
 import java.util.Arrays;
@@ -29,7 +30,17 @@ public class CourseServiceStub implements CourseService {
     }
 
     @Override
+    public List<Student> findAllStudents() {
+        return List.of();
+    }
+
+    @Override
     public void deleteCourse(String course) {
+
+    }
+
+    @Override
+    public void checkStudent(String token) {
 
     }
 }

@@ -1,9 +1,11 @@
 package br.com.erudio.automated_tests_with_java_erudio.mockito.business;
 
+import br.com.erudio.automated_tests_with_java_erudio.mockito.Student;
 import br.com.erudio.automated_tests_with_java_erudio.mockito.services.CourseService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.*;
 
 class CourseBusinessMockWithBDDTest {
@@ -18,6 +21,7 @@ class CourseBusinessMockWithBDDTest {
     CourseService mockService;
     CourseBusiness business;
     List<String> courses;
+    List<Student> students;
 
     @BeforeEach
     void setup() {
@@ -38,6 +42,16 @@ class CourseBusinessMockWithBDDTest {
             "Kotlin para DEV's Java: Aprenda a Linguagem Padrão do Android",
             "Microsserviços do 0 com Spring Cloud, Kotlin e Docker"
         );
+
+        students = Arrays.asList(
+            new Student(1L, "Joao Junio", 17, "token123"),
+            new Student(2L, "Joao", 17, "token12"),
+            new Student(3L, "Lucas", 16, "token1234"),
+            new Student(4L, "Marina", 17, "321token"),
+            new Student(5L, "Maria Fernanda", 17, "123token"),
+            new Student(6L, "Fernando", 18, "token321"),
+            new Student(7L, "Gabriel", 16, "token")
+        );
     }
 
     @Test
@@ -53,7 +67,7 @@ class CourseBusinessMockWithBDDTest {
         assertThat(filteredCourses.size(), is(4));
     }
 
-    @DisplayName("Delete Courses not Related to Spring Using Mockito should call Method")
+    @DisplayName("Delete Courses not Related to Spring Using Mockito should call Method deleteCourse")
     @Test
     void testCoursesNotRelatedToSpring_UsingMockitoVerify_ShouldCallMethod_DeleteCourses() {
         // Given / Arrange
@@ -75,5 +89,85 @@ class CourseBusinessMockWithBDDTest {
             .deleteCourse("Agile Desmistificado com Scrum, XP, Kanban e Trello");
         verify(mockService, never())
             .deleteCourse("Microsserviços do 0 com Spring Cloud, Spring Boot e Docker");
+    }
+
+    @DisplayName("Delete Courses not Related to Spring Using Mockito should call Method deleteCourse V2")
+    @Test
+    void testCoursesNotRelatedToSpring_UsingMockitoVerify_ShouldCallMethod_DeleteCoursesV2() {
+        // Given / Arrange
+        String agileCourse = "Agile Desmistificado com Scrum, XP, Kanban e Trello";
+        String architectureCourse = "Arquitetura de Microsserviços do 0 com ASP.NET, .NET 6 e C#";
+        String restSpringCourse = "Microsserviços do 0 com Spring Cloud, Spring Boot e Docker";
+
+        given(mockService.retrieveCourses("Leandro"))
+            .willReturn(courses);
+
+        // When / Act
+        business.deleteCoursesNotRelatedToSpring("Leandro");
+
+        then(mockService).should().deleteCourse(agileCourse);
+        then(mockService).should().deleteCourse(architectureCourse);
+        then(mockService).should(never()).deleteCourse(restSpringCourse);
+    }
+
+    @DisplayName("Delete Courses not Related to Spring Capturing Arguments should call Method deleteCourse")
+    @Test
+    void testCoursesNotRelatedToSpring_CapturingArguments_ShouldCallMethod_DeleteCoursesV2() {
+        // Given / Arrange
+
+        /*
+        courses = Arrays.asList(
+            "Agile Desmistificado com Scrum, XP, Kanban e Trello",
+            "REST API's RESTFul do 0 à AWS com Spring Boot 3 Kotlin e Docker"
+        );
+        */
+
+        given(mockService.retrieveCourses("Leandro"))
+            .willReturn(courses);
+
+        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
+
+        String agileCourse = "Agile Desmistificado com Scrum, XP, Kanban e Trello";
+
+        // When / Act
+        business.deleteCoursesNotRelatedToSpring("Leandro");
+
+        then(mockService).should(times(7)).deleteCourse(argumentCaptor.capture());
+        assertThat(argumentCaptor.getAllValues().size(), is(7));
+    }
+
+    @DisplayName("Checks if the Token Exists And Verifies if it is Valid")
+    @Test
+    void testCheckStudent_WhenTheTokenExists_ShouldMustCheckIfTheTokenIsValid() {
+        // Given / Arrange
+        given(mockService.findAllStudents()).willReturn(students);
+
+        var token = "token123";
+        var studentName = "Joao Junio";
+
+        // When / Act
+        business.checkStudentByToken(token);
+
+        // Then / Assert
+        verify(mockService, atLeastOnce()).checkStudent(studentName);
+    }
+
+    @DisplayName("Check if the Student List Size is 7")
+    @Test
+    void testCheckStudent_ShouldBeVerifiedWhetherTheStudentListSizeIs7() {
+        // Given / Arrange
+        given(mockService.findAllStudents()).willReturn(students);
+
+        var token = "token123";
+        for (Student student : students) student.setToken(token);
+
+        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
+
+        // When / Act
+        business.checkStudentByToken(token);
+
+        // Then / Assert
+        verify(mockService, times(7)).checkStudent(argumentCaptor.capture());
+        assertThat(argumentCaptor.getAllValues().size(), is(7));
     }
 }

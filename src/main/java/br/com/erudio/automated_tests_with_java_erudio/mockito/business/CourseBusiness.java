@@ -1,5 +1,6 @@
 package br.com.erudio.automated_tests_with_java_erudio.mockito.business;
 
+import br.com.erudio.automated_tests_with_java_erudio.mockito.Student;
 import br.com.erudio.automated_tests_with_java_erudio.mockito.services.CourseService;
 
 import java.util.ArrayList;
@@ -37,6 +38,17 @@ public class CourseBusiness {
         for (String course : allCourses) {
             if (!course.contains("Spring")) {
                 service.deleteCourse(course);
+            }
+        }
+    }
+
+    public void checkStudentByToken(String token) {
+
+        var students = service.findAllStudents();
+
+        for (Student student : students) {
+            if (token.equalsIgnoreCase(student.getToken())) {
+                service.checkStudent(student.getName());
             }
         }
     }
