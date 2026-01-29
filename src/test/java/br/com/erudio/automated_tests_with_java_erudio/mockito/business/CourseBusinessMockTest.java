@@ -2,7 +2,6 @@ package br.com.erudio.automated_tests_with_java_erudio.mockito.business;
 
 import br.com.erudio.automated_tests_with_java_erudio.mockito.services.CourseService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
