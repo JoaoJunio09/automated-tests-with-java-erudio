@@ -5,11 +5,11 @@ import java.util.UUID;
 
 public class OrderService {
 
-    public Order createOrder(String productName, Long amount, String OrderID) {
+    public Order createOrder(String productName, Long amount, String orderID) {
 
         Order order = new Order();
 
-        order.setId(OrderID == null ? UUID.randomUUID().toString() : OrderID);
+        order.setId(orderID == null ? UUID.randomUUID().toString() : orderID);
         order.setCreationDate(LocalDateTime.now());
         order.setAmount(amount);
         order.setProductName(productName);
