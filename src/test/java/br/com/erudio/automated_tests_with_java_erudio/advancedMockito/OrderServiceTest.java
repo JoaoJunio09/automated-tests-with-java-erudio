@@ -31,12 +31,12 @@ public class OrderServiceTest {
         }
     }
 
-    @DisplayName("Should nnclude current time create a new Order")
+    @DisplayName("Should include current time create a new Order")
     @Test
     void testShouldIncludeCurrentTime_When_CreateANewOrder() {
         // Given / Arrange
-        try (MockedStatic<LocalDateTime> mockedUuid = Mockito.mockStatic(LocalDateTime.class)) {
-            mockedUuid.when(LocalDateTime::now).thenReturn(defaultLocalDateTime);
+        try (MockedStatic<LocalDateTime> mockedLocalDateTime = Mockito.mockStatic(LocalDateTime.class)) {
+            mockedLocalDateTime.when(LocalDateTime::now).thenReturn(defaultLocalDateTime);
 
             // When / Act
             Order result = service.createOrder("MacBook Pro", 2L, null);
