@@ -1,6 +1,5 @@
 package br.com.erudio.automated_tests_with_java_erudio.advancedMockito.staticwithparams;
 
-import br.com.erudio.automated_tests_with_java_erudio.staticwithparams.MyUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;

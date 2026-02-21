@@ -1,4 +1,4 @@
-package br.com.erudio.automated_tests_with_java_erudio.staticwithparams;
+package br.com.erudio.automated_tests_with_java_erudio.advancedMockito.staticwithparams;
 
 public class MyUtils {
 
