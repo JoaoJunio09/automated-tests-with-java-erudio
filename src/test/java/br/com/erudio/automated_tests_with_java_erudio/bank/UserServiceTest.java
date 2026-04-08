@@ -56,7 +56,7 @@ public class UserServiceTest {
         assertThrows(
             RuntimeException.class,
             () -> service.makeDepositByUserId(10L, price),
-            () -> "User Id is null");
+            () -> "Price is null or Not a Number");
     }
 
     @DisplayName("Test Should Make Deposit When By User Id The Ten")
